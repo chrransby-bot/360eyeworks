@@ -8,7 +8,7 @@ Du svarede ikke på alle afklarende spørgsmål, så jeg har valgt standarder. R
 
 - **Områder:** Virksomhed, Økonomi, Sundhed, Familie, Læring, Hjem
 - **Vaner (i Dagbog):** Motion, Læsning, Planlagt dagen, Sovet 7+ timer, Skærmfri aften
-- **Virksomhed:** 360eyeworks sælger, servicerer og installerer tyverialarmer, adgangskontrol og videoovervågning og laver midlertidig overvågning på festivaler. Kunderne Frode Laursen (Unilock, Ajax, Hikvision, Milestone, kontakt Jacob Nicolaisen), Heartland og Copenhell er lagt ind. Kontaktpersoner, datoer og tjenester er tomme, indtil de bliver udfyldt.
+- **Virksomhed:** 360eyeworks sælger, servicerer og installerer tyverialarmer, adgangskontrol og videoovervågning og laver midlertidig overvågning på festivaler. Kunderne Frode Laursen (Unilock, Ajax, Hikvision, Milestone, kontakt Jacob Nicolaisen), Heartland (kontakt Christian Rauer) og Copenhell (kontakt Per Wiedekamm) er lagt ind med hvert sit projekt for 2027. Mail og telefon udfyldes, når systemet kører. Kontaktpersoner, datoer og tjenester er tomme, indtil de bliver udfyldt.
 
 ## Filer
 
@@ -52,7 +52,7 @@ Klik på kolonneoverskriften → **Edit property** → **Type**. Brug denne tabe
 | Ressourcer / Noter | Tags | Multi-select |
 | Ressourcer / Noter | Dato | Date |
 | Kunder & kontakter | Kundetype | Select (Fast kunde, Festival, Privat, Andet) |
-| Kunder & kontakter | Tjenester | Multi-select (Tyverialarm, Adgangskontrol, Videoovervågning, Midlertidig overvågning, Service) |
+| Kunder & kontakter | Tjenester | Multi-select (Tyverialarm, Adgangskontrol, Videoovervågning, Midlertidig overvågning, Beredskabskontor, Service) |
 | Kunder & kontakter | Systemer | Tekst (installeret udstyr og platforme, fx Unilock, Ajax, Hikvision, Milestone) |
 | Kunder & kontakter | Status | Select (Lead, Aktiv kunde, Pause, Afsluttet) |
 | Projekter | Tjeneste | Multi-select (samme værdier som Tjenester) |
