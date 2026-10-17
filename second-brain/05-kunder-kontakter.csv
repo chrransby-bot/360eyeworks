@@ -1,4 +1,4 @@
-Navn,Kundetype,Tjenester,Kontaktperson,Mail,Telefon,Status,Seneste kontakt,Næste opfølgning,Noter
-Frode Laursen,Fast kunde,,,,,Aktiv kunde,,,Stor dansk transportvirksomhed. Flere leverancer udført
-Heartland,Festival,Midlertidig overvågning,,,,Aktiv kunde,,,Årlig festival
-Copenhell,Festival,Midlertidig overvågning,,,,Aktiv kunde,,,Årlig festival
+Navn,Kundetype,Tjenester,Systemer,Kontaktperson,Mail,Telefon,Status,Seneste kontakt,Næste opfølgning,Noter
+Frode Laursen,Fast kunde,"Adgangskontrol, Tyverialarm, Videoovervågning","Unilock adgangskontrol, Ajax alarm, Hikvision-kameraer, Milestone (kundens egen server)",Jacob Nicolaisen,,,Aktiv kunde,,,"Stor dansk transportvirksomhed (FL). Kameraerne kører på kundens egen Milestone-server."
+Heartland,Festival,Midlertidig overvågning,,,,,Aktiv kunde,,,Årlig festival
+Copenhell,Festival,Midlertidig overvågning,,,,,Aktiv kunde,,,Årlig festival
