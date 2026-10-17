@@ -1,2 +1,4 @@
-Navn,Firma,Mail,Telefon,Status,Seneste kontakt,Næste opfølgning,Noter
-Eksempel Kontakt,Eksempel Kunde ApS,kontakt@example.com,+45 12 34 56 78,Lead,2026-10-10,2026-10-24,Slet eller overskriv med din første rigtige kunde
+Navn,Kundetype,Tjenester,Kontaktperson,Mail,Telefon,Status,Seneste kontakt,Næste opfølgning,Noter
+Frode Laursen,Fast kunde,,,,,Aktiv kunde,,,Stor dansk transportvirksomhed. Flere leverancer udført
+Heartland,Festival,Midlertidig overvågning,,,,Aktiv kunde,,,Årlig festival
+Copenhell,Festival,Midlertidig overvågning,,,,Aktiv kunde,,,Årlig festival

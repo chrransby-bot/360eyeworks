@@ -8,7 +8,7 @@ Du svarede ikke på alle afklarende spørgsmål, så jeg har valgt standarder. R
 
 - **Områder:** Virksomhed, Økonomi, Sundhed, Familie, Læring, Hjem
 - **Vaner (i Dagbog):** Motion, Læsning, Planlagt dagen, Sovet 7+ timer, Skærmfri aften
-- **Virksomhed:** 360eyeworks er din virksomhed. Kundefelterne er generelle (status, seneste kontakt, næste opfølgning). Tilpas dem til dine tjenester.
+- **Virksomhed:** 360eyeworks sælger, servicerer og installerer tyverialarmer, adgangskontrol og videoovervågning og laver midlertidig overvågning på festivaler. Kunderne Frode Laursen, Heartland og Copenhell er lagt ind. Kontaktpersoner, datoer og tjenester er tomme, indtil de bliver udfyldt.
 
 ## Filer
 
@@ -51,7 +51,10 @@ Klik på kolonneoverskriften → **Edit property** → **Type**. Brug denne tabe
 | Ressourcer / Noter | Type | Select (Note, Mødenote, Bog, Artikel, Link) |
 | Ressourcer / Noter | Tags | Multi-select |
 | Ressourcer / Noter | Dato | Date |
+| Kunder & kontakter | Kundetype | Select (Fast kunde, Festival, Privat, Andet) |
+| Kunder & kontakter | Tjenester | Multi-select (Tyverialarm, Adgangskontrol, Videoovervågning, Midlertidig overvågning, Service) |
 | Kunder & kontakter | Status | Select (Lead, Aktiv kunde, Pause, Afsluttet) |
+| Projekter | Tjeneste | Multi-select (samme værdier som Tjenester) |
 | Kunder & kontakter | Mail | Email |
 | Kunder & kontakter | Telefon | Phone |
 | Kunder & kontakter | Seneste kontakt, Næste opfølgning | Date |

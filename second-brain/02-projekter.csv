@@ -1,4 +1,2 @@
-Navn,Status,Deadline,Område,Kunde,Mål,Beskrivelse
-Opsæt second brain,Aktiv,2026-11-01,Læring,,,Bygge og tage mit Notion-system i brug
-Eksempelprojekt: Leverance til kunde,Planlagt,2026-12-15,Virksomhed,Eksempel Kunde ApS,Få 5 nye kunder i 2026,Slet eller omdøb når du har dine egne projekter
-Lav årsbudget,Planlagt,2026-12-01,Økonomi,,Opbyg buffer på 3 måneders udgifter,Sæt budget for næste år
+Navn,Status,Deadline,Område,Kunde,Mål,Tjeneste,Beskrivelse
+Opsæt second brain,Aktiv,2026-11-01,Læring,,,,Bygge og tage mit Notion-system i brug
