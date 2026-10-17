@@ -1,0 +1,4 @@
+Titel,Dato,Beløb,Type,Kategori,Område,Kunde,Betalt
+Eksempel: Faktura til kunde,2026-10-15,10000,Indtægt,Faktura,Virksomhed,Eksempel Kunde ApS,Nej
+Eksempel: Software-abonnement,2026-10-01,-199,Udgift,Software,Virksomhed,,Ja
+Eksempel: Dagligvarer,2026-10-12,-450,Udgift,Mad,Hjem,,Ja
