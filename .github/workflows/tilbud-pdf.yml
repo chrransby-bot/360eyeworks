@@ -1,0 +1,24 @@
+name: Lav tilbuds-PDF
+
+on:
+  workflow_dispatch:
+    inputs:
+      tilbudsnr:
+        description: "Tilbudsnummer, fx 2026-003"
+        required: true
+
+jobs:
+  pdf:
+    runs-on: ubuntu-latest
+    env:
+      NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+      NOTION_TILBUD_ID: ${{ secrets.NOTION_TILBUD_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lav PDF
+        run: python3 tilbud/lav_tilbud_pdf.py --nr "${{ inputs.tilbudsnr }}" --ud pdf
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tilbud-${{ inputs.tilbudsnr }}
+          path: pdf/*.pdf
+          retention-days: 14

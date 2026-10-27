@@ -1,14 +1,38 @@
 # Tilbudssystem i Notion
 
-Systemet ligger på den private Notion-side **Tilbud** og består af tre databaser:
+Systemet ligger på den private Notion-side **Tilbud** og består af fire databaser:
 
 | Database | Indhold |
 |---|---|
-| **Prisliste** | Varekatalog med kostpris, listepris, avance og salgspris |
-| **Tilbud** | Ét tilbud pr. række: nummer, status, datoer, rabat, moms og total |
+| **Kunder** | Kunder med kontaktperson, adresse og CVR |
+| **Prisliste** | Varekatalog og timer med kostpris, listepris, avance og salgspris |
+| **Tilbud** | Ét tilbud pr. række: kunde, beskrivelse, datoer, rabat, moms og total |
 | **Tilbudslinjer** | Varer og timer på et tilbud (antal, enhedspris, linjesum) |
 
-Tilbudsnumre vises som `2026-1`, `2026-2` osv. Notion kan ikke udfylde med nuller foran. Ved årsskifte ændrer du præfikset på **Tilbudsnr.** til det nye år. Tælleren fortsætter, den nulstilles ikke.
+Tilbudsnummeret er årstal + løbenummer, fx `2026-003`. Løbenummeret fortsætter på tværs af år og nulstilles ikke ved årsskifte.
+
+## Sådan laver du et tilbud
+
+1. Opret en ny række i **Tilbud**. Giv det en titel.
+2. Vælg **Kunde** (fra Kunder), skriv en **Beskrivelse** og vælg **Betalingsbetingelser** og datoer. Længere tekst, fx forudsætninger, skriver du på selve tilbudssiden. Den kommer med på PDF'en.
+3. Tilføj **linjer** i tabellen på tilbudssiden: vælg en **Vare** fra Prisliste (udstyr eller en timepost som *Montørtime*), skriv **Antal** (fx antal timer) og eventuelt en beskrivelse. Prisen hentes fra prislisten. Skriv **Enhedspris manuel** for at bruge en anden pris på linjen.
+4. Sæt **Rabat %** hvis der gives rabat. Subtotal, moms og total regnes automatisk.
+5. Lav PDF'en (se nedenfor), send den til kunden, og sæt **Status** til *Sendt* og **Opfølgning** til en dato.
+
+## PDF til kunden
+
+`lav_tilbud_pdf.py` henter tilbuddet, kunden og linjerne fra Notion og laver en PDF med dine firmaoplysninger. Udfyld `firma.json` først (adresse, CVR, telefon, mail og eventuelt en logo-adresse).
+
+**Fra GitHub:** gå til **Actions → Lav tilbuds-PDF → Run workflow**, skriv tilbudsnummeret (fx `2026-003`), og hent PDF'en under *Artifacts* på kørslen. Kræver hemmelighederne `NOTION_TOKEN` og `NOTION_TILBUD_ID` (databasens ID, `3df4444f431d48c0ad320e064fe83f45`).
+
+**Lokalt:**
+
+```bash
+export NOTION_TOKEN=... NOTION_TILBUD_ID=3df4444f431d48c0ad320e064fe83f45
+python3 tilbud/lav_tilbud_pdf.py --nr 2026-003 --ud pdf
+```
+
+Scriptet kræver Chrome eller Chromium (findes på GitHubs servere). Totalerne regnes efter og sammenlignes med Notions tal, og en forskel vises som advarsel.
 
 ## Prisliste: to måder at fylde den på
 
