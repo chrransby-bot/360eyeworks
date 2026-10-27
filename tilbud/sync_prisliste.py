@@ -32,9 +32,10 @@ API = "https://api.notion.com/v1"
 
 # Nøgleord i leverandørens Type -> Kategori i Prisliste. Første match vinder.
 KATEGORIER = [
-    ("Video", ["kamera", "nvr", "dvr", "optager", "videoovervåg", "cctv", "monitor"]),
-    ("Adgangskontrol", ["adgang", "kortlæser", "dørtelefon", "dørcontroller", "lås", "intercom", "rfid"]),
-    ("Alarm", ["detektor", "sirene", "alarm", "central", "sensor", "perimeter", "panic"]),
+    ("Video", ["kamera", "nvr", "dvr", "optager", "videoovervåg", "cctv", "monitor", "ir-belysning", "skærmbeslag"]),
+    ("Adgangskontrol", ["adgang", "kortlæser", "dørtelefon", "dørcontroller", "lås", "intercom", "rfid",
+                        "dørstation", "exit-knap", "el-slutblik", "dørlukker", "kort & brikker", "tastatur"]),
+    ("Alarm", ["detektor", "sirene", "alarm", "central", "sensor", "perimeter", "panic", "laserhegn"]),
 ]
 
 
@@ -104,9 +105,7 @@ def egenskaber(v, ny, standard_avance):
         "Aktiv": {"checkbox": True},
     }
     if ny:
-        kat = kategori(v["Produkttype"])
-        if kat:
-            p["Kategori"] = {"select": {"name": kat}}
+        p["Kategori"] = {"select": {"name": kategori(v["Produkttype"]) or "Andet"}}
         if standard_avance is not None:
             p["Avance %"] = {"number": standard_avance}
     return p
