@@ -71,6 +71,20 @@ class Notion:
                 return ud
             cursor = svar["next_cursor"]
 
+    def relation(self, side, navn):
+        """Alle ID'er i en relation. Notion sender højst 25 med på siden, resten hentes her."""
+        egenskab = side["properties"][navn]
+        if not egenskab.get("has_more"):
+            return [r["id"] for r in egenskab["relation"]]
+        ud, cursor = [], None
+        while True:
+            sti = f"/pages/{side['id']}/properties/{egenskab['id']}?page_size=100"
+            svar = self.kald("GET", sti + (f"&start_cursor={cursor}" if cursor else ""))
+            ud += [r["relation"]["id"] for r in svar["results"]]
+            if not svar.get("has_more"):
+                return ud
+            cursor = svar["next_cursor"]
+
 
 def tekst(egenskab):
     """Almindelig tekst fra en title- eller rich_text-egenskab."""
@@ -135,8 +149,8 @@ def hent_tilbud(notion, args):
                  "cvr": tekst(k["CVR"]), "kontaktperson": tekst(k["Kontaktperson"]), "mail": k["Mail"]["email"] or ""}
 
     linjer = []
-    for r in p["Linjer"]["relation"]:
-        l = notion.side(r["id"])["properties"]
+    for linje_id in notion.relation(t, "Linjer"):
+        l = notion.side(linje_id)["properties"]
         vare = ""
         if l["Vare"]["relation"]:
             vare = tekst(notion.side(l["Vare"]["relation"][0]["id"])["properties"]["Varenavn"])
@@ -175,6 +189,9 @@ def beregn(t):
     moms = round(efter * 0.25, 2)
     egne = {"sub": sub, "rabat": rabat, "efter": efter, "moms": moms, "total": round(efter + moms, 2)}
     advarsler = []
+    for l in t["linjer"]:
+        if l.get("sum") is not None and abs(l["sum"] - l["_sum"]) > 0.01:
+            advarsler.append(f"linjen '{l['tekst'] or l['vare']}': Notion siger {l['sum']}, men antal × pris giver {l['_sum']}")
     for k, v in egne.items():
         if t.get(k) is None:
             t[k] = v
@@ -189,6 +206,13 @@ def kr(v):
 
 def antal(v):
     return (f"{v:g}").replace(".", ",")
+
+
+FLERTAL = {"time": "timer", "dag": "dage", "måned": "måneder"}
+
+
+def enhed(navn, mængde):
+    return FLERTAL.get(navn, navn) if mængde != 1 else navn
 
 
 def dansk_dato(d):
@@ -242,7 +266,7 @@ def lav_html(t, f):
     for l in t["linjer"]:
         navn = l["tekst"] or l["vare"]
         under = f'<div class="sub">{e(l["vare"])}</div>' if l["tekst"] and l["vare"] and l["vare"] != l["tekst"] else ""
-        række.append(f'<tr><td>{e(navn)}{under}</td><td class="r">{antal(l["antal"])} {e(l["enhed"])}</td>'
+        række.append(f'<tr><td>{e(navn)}{under}</td><td class="r">{antal(l["antal"])} {e(enhed(l["enhed"], l["antal"]))}</td>'
                      f'<td class="r">{kr(l["enhedspris"])}</td><td class="r">{kr(l["_sum"])}</td></tr>')
     rabat_række = ""
     if t["rabat"]:
@@ -330,8 +354,10 @@ def main():
             sys.exit("NOTION_TOKEN skal være sat")
         t = hent_tilbud(Notion(token), args)
 
+    # I GitHub Actions bliver ::warning:: vist øverst på kørslen i stedet for at gemme sig i loggen
+    forstavelse = "::warning::" if os.environ.get("GITHUB_ACTIONS") else "ADVARSEL: "
     for w in beregn(t):
-        print("ADVARSEL: " + w, file=sys.stderr)
+        print(forstavelse + w, file=sys.stderr)
     mangler = [k for k, v in firma.items() if isinstance(v, str) and v.startswith("UDFYLD")]
     if mangler:
         print("ADVARSEL: udfyld firma.json: " + ", ".join(mangler), file=sys.stderr)
