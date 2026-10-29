@@ -182,6 +182,8 @@ def hent_tilbud(notion, args):
 def beregn(t):
     """Regn totalerne selv og sammenlign med Notions tal. Returnerer advarsler."""
     for l in t["linjer"]:
+        # Prisen rundes til hele øre først, så antal × pris på PDF'en altid giver det viste beløb
+        l["enhedspris"] = round(l["enhedspris"], 2)
         l["_sum"] = round(l["antal"] * l["enhedspris"], 2)
     sub = round(sum(l["_sum"] for l in t["linjer"]), 2)
     rabat = round(sub * (t["rabat_pct"] or 0) / 100, 2)
@@ -193,10 +195,10 @@ def beregn(t):
         if l.get("sum") is not None and abs(l["sum"] - l["_sum"]) > 0.01:
             advarsler.append(f"linjen '{l['tekst'] or l['vare']}': Notion siger {l['sum']}, men antal × pris giver {l['_sum']}")
     for k, v in egne.items():
-        if t.get(k) is None:
-            t[k] = v
-        elif abs(t[k] - v) > 0.01:
+        if t.get(k) is not None and abs(t[k] - v) > 0.01:
             advarsler.append(f"{k}: Notion siger {t[k]}, men linjerne giver {v}")
+        # PDF'en viser altid de tal, linjerne giver, så totalerne passer med det kunden ser
+        t[k] = v
     return advarsler
 
 
